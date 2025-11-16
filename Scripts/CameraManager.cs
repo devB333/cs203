@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// Known Issues: Jitter on Camera Collide and Jitter when Jumping
 public class CameraManager : MonoBehaviour
 {
     public Rigidbody playerRigidbody; //  reference to the player transform to get position
@@ -107,3 +107,4 @@ public class CameraManager : MonoBehaviour
     }
 
 }
+
