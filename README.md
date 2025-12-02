@@ -1,6 +1,6 @@
 # Unity Portal Mechanic
 ## Abstract
-My plan was to create a functioning portal game mechanic that displays the view from the other side of the portal
+My plan was to develop a functioning portal game mechanic that displays the view of the other side of the portal in Unity utilizing LinkedLists, Shaders, and Camera RenderTextures to achieve the desired effect.
 ## Structure
 - PlayerMovement, PlayerCamera, and SphereRoll scripts create basic movement
 - MovePortalCamera syncs with player movement and captures the target portal
