@@ -5,26 +5,25 @@ public class PortTeleporter : MonoBehaviour
 {
     public Transform player;
     public PortTeleporter targetPortal;
-    public bool playerColliding = false;
-    public LinkedList<PortalTraveller> currTravellers = new LinkedList<PortalTraveller>();
+    public LinkedList<PortalTraveller> currTravellers = new LinkedList<PortalTraveller>(); // tracks portal travellers using a linked list for fast removal
 
-    // Update is called once per frame
     void LateUpdate()
     {
         if(currTravellers.First != null){
             var node = currTravellers.First;
+            // uses while loop to allow removal during the loop
             while (node != null)
             {
                 var traveller = node.Value;
                 node = node.Next;
                 Transform travellerTF = traveller.transform;
+                // matrices multiplied together which gets the new location while keeping the current rotation
                 var matrix = targetPortal.transform.localToWorldMatrix * transform.worldToLocalMatrix * travellerTF.localToWorldMatrix;
-                
-                    var currPosition = travellerTF.position;
-                    var currRotation = travellerTF.rotation;
-                    traveller.Teleport(transform, targetPortal.transform, matrix.GetColumn(3), matrix.rotation);
 
-                    currTravellers.Remove(traveller);
+                // gets column 3 of matrix (the position)
+                traveller.Teleport(transform, targetPortal.transform, matrix.GetColumn(3), matrix.rotation); 
+
+                currTravellers.Remove(traveller);
             }
         }
     }
@@ -33,25 +32,24 @@ public class PortTeleporter : MonoBehaviour
     {
         if (!currTravellers.Contains(traveller))
         {
-            traveller.prevOffsetFromPortal = traveller.transform.position - transform.position;
             currTravellers.AddLast(traveller);
         }
     }
 
+    // if object that collides is able to go through the portal, allows it to enter
     void OnTriggerEnter (Collider other)
     {
         GameObject obj = other.gameObject;
         PortalTraveller traveller = obj.GetComponentInParent<PortalTraveller>();
         if(traveller)
         {
-            playerColliding = true;
             OnTravellerEnterPortal(traveller);
         }
     }
 
+    // removes from list when leaving collider
     void OnTriggerExit (Collider other)
     {
-        playerColliding = false;
         var traveller = other.GetComponent<PortalTraveller>();
         if(traveller && currTravellers.Contains(traveller))
         {
@@ -59,3 +57,4 @@ public class PortTeleporter : MonoBehaviour
         }
     }
 }
+
