@@ -4,7 +4,6 @@ using System.Collections;
 public class PortalTraveller : MonoBehaviour
 {
     public GameObject cloneObject;
-    public Vector3 prevOffsetFromPortal { get; set; }
 
     public virtual void Teleport (Transform currPortal, Transform targetPortal, Vector3 position, Quaternion rotation)
     {
@@ -13,12 +12,15 @@ public class PortalTraveller : MonoBehaviour
         Physics.SyncTransforms();
         targetPortal.GetComponent<Collider>().enabled = false;
 
+        // makes sure you have time to leave the portal after teleporting
         StartCoroutine(TurnOnCollision(1f, targetPortal));
     }
 
+    // turn target portal collision back on after a second
     IEnumerator TurnOnCollision(float waitTime, Transform targetPortal)
     {
         yield return new WaitForSeconds(waitTime);
         targetPortal.GetComponent<Collider>().enabled = true;
     }
 }
+
