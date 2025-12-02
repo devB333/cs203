@@ -41,6 +41,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        // jumps if jump was pressed + player isn't floating
         if(Input.GetButton("Jump") && readyToJump && grounded)
         {
             readyToJump = false;
@@ -112,3 +113,4 @@ public class NewMonoBehaviourScript : MonoBehaviour
         readyToJump = true;
     }
 }
+
