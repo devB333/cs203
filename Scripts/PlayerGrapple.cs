@@ -54,10 +54,10 @@ public class PlayerGrapple : MonoBehaviour
             return;
 
         elapsedTime += Time.deltaTime;
-        float t = Mathf.Clamp01(elapsedTime / moveDuration);
+        float t = Mathf.Clamp01(elapsedTime / moveDuration);// this is the interpolation factor (between 0 - 1)
 
         //Horizontal linerar movement
-        Vector3 horizontalPos = Vector3.Lerp(startPos, targetPos, t);
+        Vector3 horizontalPos = Vector3.Lerp(startPos, targetPos, t);// t is the interpolation factor that determines how far between the startPos and targetPos the lerp point is
 
         //Vertical arc (sine curve, peaks at t = 0.5)
         float height = Mathf.Sin(Mathf.PI * t) * maxArcHeight;
