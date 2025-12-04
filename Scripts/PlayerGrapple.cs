@@ -17,7 +17,7 @@ public class PlayerGrapple : MonoBehaviour
 
 
 
-    public void setGrappelTarget(Transform target)// this is the first method that will run based. It will take the transform of the cloest valid grapple point and then get its position
+    public void setGrappelTarget(Transform target)// this is the first method that will run based on a call from Player.cs. It will take the transform of the cloest valid grapple point and then get its position
     {
         targetPos = target.position;// gets the position of the grapple in world space
        
