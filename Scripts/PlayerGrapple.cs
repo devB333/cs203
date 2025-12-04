@@ -29,7 +29,7 @@ public class PlayerGrapple : MonoBehaviour
 
 
     // Start 
-    public void StartGrapple()
+    public void StartGrapple()// this method is called by the animation
     {
         startPos = transform.position;
         elapsedTime = 0f;
